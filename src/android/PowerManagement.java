@@ -76,7 +76,7 @@ public class PowerManagement extends CordovaPlugin {
 				try {
 					this.releaseOnPause = args.getBoolean(0);
 					result = new PluginResult(PluginResult.Status.OK);
-				} catch (Exception e) {
+				} catch (Exception | RuntimeException e) {
 					result = new PluginResult(PluginResult.Status.ERROR, "Could not set releaseOnPause");
 				}
 			}
@@ -103,7 +103,7 @@ public class PowerManagement extends CordovaPlugin {
 				this.wakeLock.acquire();
 				result = new PluginResult(PluginResult.Status.OK);
 			}
-			catch( Exception e ) {
+			catch( Exception | RuntimeException e ) {
 				this.wakeLock = null;
 				result = new PluginResult(PluginResult.Status.ERROR,"Can't acquire wake-lock - check your permissions!");
 			}
@@ -127,7 +127,7 @@ public class PowerManagement extends CordovaPlugin {
 				this.wakeLock.release();
 				result = new PluginResult(PluginResult.Status.OK, "OK");
 			}
-			catch (Exception e) {
+			catch (Exception | RuntimeException e) {
 				result = new PluginResult(PluginResult.Status.ILLEGAL_ACCESS_EXCEPTION, "WakeLock already released");
 			}
 
